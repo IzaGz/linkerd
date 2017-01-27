@@ -22,6 +22,7 @@ object DstTracing {
       private[this] val pathShow = dst.path.show
       override def apply(conn: ClientConnection) = {
         if (Trace.isActivelyTracing) {
+          Trace.recordRpc(pathShow) // TODO: add router label
           Trace.recordBinary("namer.dtab.base", baseDtabShow)
           Trace.recordBinary("namer.dtab.local", localDtabShow)
           Trace.recordBinary("namer.path", pathShow)
