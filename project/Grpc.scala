@@ -109,14 +109,13 @@ object Grpc extends Base {
       publishArtifact := true
     )
 
-  /** Interop */
+  /** Interop test server  */
   val interop = projectDir("grpc/interop")
+    .withTwitterLib(Deps.twitterServer)
     .withGrpc
     .withTests()
-    .settings(
-      publishArtifact := false
-    )
+    .settings(publishArtifact := false)
 
-  val all = aggregateDir("grpc", eg, interop, usage, gen, runtime)
+  val all = aggregateDir("grpc", eg, gen, interop, runtime)
 
 }
